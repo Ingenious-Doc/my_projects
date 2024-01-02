@@ -1,0 +1,1 @@
+A simple compression tool that compresses a file using huffman coding and then decompresses it again and outputs it to check :D
