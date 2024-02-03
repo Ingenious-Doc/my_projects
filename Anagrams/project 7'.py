@@ -1,4 +1,4 @@
--****-----`/*import sys
+import sys
 from itertools import permutations
 from collections import Counter
 import load_dictionary
@@ -8,7 +8,7 @@ def prep_words(name,word_list_ini):
     """Prepare word list for finding anagrams"""
     print(f"Length initial word list = {len(word_list_ini)}")
     len_name=len(name)
-    word_list=[word.lower for word in word_list_ini if len(word)==len(name)]
+    word_list=[word.lower() for word in word_list_ini if len(word)==len(name)]
     print(f"length of new word_list ={len(word_list)}")
     return word_list
 
@@ -38,7 +38,7 @@ def cv_map_words(word_list):
 
 def cv_map_filter(name,filtered_cv_map):
     """Remove permutations of words based on unlikely cons-vowel combos"""
-    perms={''.join(i) for i in permutations(name)}+
+    perms={''.join(i) for i in permutations(name)}
     print("Length of initial permutations set ={}".format(len(perms)))
     vowels='aeiouy'
     filter_1=set()
@@ -87,9 +87,21 @@ def letter_pair_filter(filter_2):
     return filter_3
 
 
-
-
-
+def view_by_letter(name,filter_3):
+    """Filter to anagrams starting with input letter. """
+    print('Remaining letters {}'.format(name))
+    first=input("select starting letter or press enter to see all:")
+    subset=[]
+    for candidate in filter_3:
+        if candidate.startswith(first):
+            subset.append(candidate)
+    print(*sorted(subset),sep="\n")
+    print("number of choices starting with {} = {} ".format(first,len(subset)))
+    try_again=input('Try again? (Press Enter else any other key to exit):')
+    if try_again.lower()=="":
+        view_by_letter((name,filter_3))
+    else:
+        sys.exit()
 
 def main():
     """Load files, run filters, allow user to view anagrams byy 1st letter"""
@@ -104,3 +116,5 @@ def main():
     filter_3=letter_pair_filter(filter_2)
     view_by_letter(name,filter_3)
 
+if __name__=='__main__':
+    main()
