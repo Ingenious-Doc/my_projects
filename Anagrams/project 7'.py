@@ -1,4 +1,4 @@
-import sys
+-****-----`/*import sys
 from itertools import permutations
 from collections import Counter
 import load_dictionary
@@ -38,7 +38,7 @@ def cv_map_words(word_list):
 
 def cv_map_filter(name,filtered_cv_map):
     """Remove permutations of words based on unlikely cons-vowel combos"""
-    perms={''.join(i) for i in permutations(name)}
+    perms={''.join(i) for i in permutations(name)}+
     print("Length of initial permutations set ={}".format(len(perms)))
     vowels='aeiouy'
     filter_1=set()
@@ -66,6 +66,28 @@ def trigram_filter(filter_1,tirgrams_filtered):
     filter_2=filter_1-filtered
     print("# of choices after fileter_2 ={} ".format(len(filter_2)))
     return filter_2
+
+
+def letter_pair_filter(filter_2):
+    """rremove unlikely letter-pairs from permutations."""
+    filtered=set()
+    rejects=['dt','lr','md','ml','mr','mt','mv','td','tv','vd','vl','vm','vr','vt']
+    first_pair_rejects=['ld','lm','lt','lv','rd','rl','rm','rt','rv','tl','tm']
+    for candidate in filter_2:
+        for r in rejects:
+            if r in candidate:
+                filtered.add(candidate)
+        for fp in first_pair_rejects:
+            if candidate.startswith(fp):
+                filtered.add(candidate)
+    filter_3=filter_2-filtered
+    print("# of choices after filter_3= {}".format(len(filter_3)))
+    if 'voldemort' in filter_3:
+        print("Voldemort found!!",file=sys.stderr)
+    return filter_3
+
+
+
 
 
 
