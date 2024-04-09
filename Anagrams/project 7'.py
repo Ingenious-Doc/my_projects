@@ -69,7 +69,7 @@ def trigram_filter(filter_1,tirgrams_filtered):
 
 
 def letter_pair_filter(filter_2):
-    """rremove unlikely letter-pairs from permutations."""
+    """remove unlikely letter-pairs from permutations."""
     filtered=set()
     rejects=['dt','lr','md','ml','mr','mt','mv','td','tv','vd','vl','vm','vr','vt']
     first_pair_rejects=['ld','lm','lt','lv','rd','rl','rm','rt','rv','tl','tm']
@@ -102,6 +102,7 @@ def view_by_letter(name,filter_3):
         view_by_letter((name,filter_3))
     else:
         sys.exit()
+
 
 def main():
     """Load files, run filters, allow user to view anagrams byy 1st letter"""
