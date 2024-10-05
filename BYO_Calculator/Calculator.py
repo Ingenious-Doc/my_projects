@@ -17,15 +17,34 @@ class Calculator():
                     operator=self.operations.pop()
                     self.equation.append(operator)
             else:
-                self.equation.append(my_input[i])
+                self.equation.append(int(my_input[i]))
         while self.operations:
             self.equation.append(self.operations.pop())
-        return "".join(self.equation)
-    def calculate(self):
+        return self.calculate(self.equation)
+    def calculate(self,equation):
+        my_stack=[]
+        for num in equation:
+            if num not in self.operands:
+                my_stack.append(num)
+            else:
+                num1=my_stack.pop()
+                num2=my_stack.pop()
+                if num=="/":
+                    my_stack.append(num2/num1)
+                elif num=='*':
+                    my_stack.append(num2*num1)
+                elif num=='-':
+                    my_stack.append(num2-num1)
+                elif num=='+':
+                    my_stack.append(num2+num1)
+                else:
+                    pass
+
+        return str(my_stack)
 
 
 
 #1 * 2 - 3 * 4
 #1 2 * 3 4 * -
-cal=Calculator().parser("1 - 2 * 3 / 4")
+cal=Calculator().converter("1 - 2 * 3 / 4")
 print(cal)
