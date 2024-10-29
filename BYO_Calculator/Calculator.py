@@ -13,16 +13,16 @@ class Calculator():
             # 1 - 2 * 3 / 4
             if my_input[i] in self.operands:
                 self.operations.append(my_input[i])
-                if len(self.operations)>1:
+                for i in range(1,len(self.operations)):
                     if self.operands[self.operations[-2]]>=self.operands[self.operations[-1]] :
-                        operator=self.operations.pop(0)
+                        operator=self.operations.pop(-2)
                         self.equation.append(operator)
             else:
                 self.equation.append(int(my_input[i]))
         while self.operations:
             self.equation.append(self.operations.pop())
-        # return self.calculate(self.equation)
-        return self.equation
+        return self.calculate(self.equation)
+        # return self.equation
     def calculate(self,equation):
         my_stack=[]
         for num in equation:
@@ -48,5 +48,5 @@ class Calculator():
 
 #1 * 2 - 3 * 4
 #1 2 * 3 4 * -
-cal=Calculator().converter("7 + 4 - 6 * 12")
+cal=Calculator().converter("7 + 4 - 6 * 12 - 5 + 6")
 print(cal)
